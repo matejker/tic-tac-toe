@@ -5,8 +5,9 @@ description = ""
 authors = ["Matej Kerekrety <matej.kerekrety@gmail.com>"]
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = ">=3.8,<3.11"
 notebook = "^6.4.3"
+numpy = "^1.21.2"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.2.4"

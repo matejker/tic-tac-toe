@@ -6,8 +6,8 @@ class Ternary:
         self.number = number
         self.decimal = decimal or int(str(number), 3)
 
-    def __repr__(self) -> int:
-        return self.number
+    def __repr__(self) -> str:
+        return str(self.number)
 
 
 def convert_decimal_to_ternary(decimal_number: int) -> Ternary:

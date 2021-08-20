@@ -15,7 +15,7 @@ lint: requirements_tools
 
 .PHONY: test
 test: requirements_tools
-	poetry run pytest --color=yes $(TEST_ONLY)
+	poetry run pytest -vv --color=yes $(TEST_ONLY)
 
 .PHONY: format
 format: requirements_tools
