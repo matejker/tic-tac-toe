@@ -24,3 +24,7 @@ format: requirements_tools
 .PHONY: typecheck
 typecheck: requirements_tools
 	poetry run mypy tests tic_tac_toe
+
+.PHONY: notebook
+notebook:
+	poetry run jupyter notebook
