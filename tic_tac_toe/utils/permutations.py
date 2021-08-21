@@ -37,7 +37,7 @@ def get_all_symmetries_for_board(board: Ternary) -> List[Ternary]:
     for p in SYMMETRY_PERMUTATIONS:
         symmetry = list(board_array[p])
         symmetry_str = "".join([str(s) for s in symmetry])
-        symmetry_ternary = Ternary(int(symmetry_str))
+        symmetry_ternary = Ternary(symmetry_str)
         symmetry_list.append(symmetry_ternary)
 
     return list(set(symmetry_list))
