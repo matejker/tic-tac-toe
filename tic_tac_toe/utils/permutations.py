@@ -4,7 +4,7 @@ from typing import List
 from tic_tac_toe.utils.ternary import Ternary
 
 """
-  Symmetries of tic-tac-toe are equivalent to symmetries of square, often noted as D_4 with total 8 symmetries.
+  Symmetries of tic-tac-toe are equivalent to the symmetries of a square, often noted as D_4 with total 8 symmetries.
                A   t_y    D
   1 | 2 | 3     \ | | | /  t_AD
  ---+---+---   ---+---+---         • reflections about horizontal and vertical x and y axes
@@ -13,7 +13,7 @@ from tic_tac_toe.utils.ternary import Ternary
   6 | 7 | 8     / | | | \ t_AC
               B           C
   However, the center is fixed for all symmetries we can simply ignore it in the permutations and consider only
-  1-9 positions.
+  1-8 positions.
 """  # noqa
 
 SYMMETRY_PERMUTATIONS = [

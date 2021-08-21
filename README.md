@@ -2,6 +2,7 @@
 
 
 ## References
-[1] D. Michie (1960), "Experiments on the mechanization of game-learning Part I. Characterization of the model 
-and its parameters", https://people.csail.mit.edu/brooks/idocs/matchbox.pdf 
+[1] Michie, D. (1960), "Experiments on the mechanization of game-learning Part I. Characterization of the model 
+and its parameters", https://people.csail.mit.edu/brooks/idocs/matchbox.pdf  
+[2] Sutton, R. S. & Barto, A. G. (2018), "Reinforcement Learning: An Introduction", The MIT Press.  
 
