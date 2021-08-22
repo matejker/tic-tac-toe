@@ -1,81 +1,86 @@
 import numpy as np
 from typing import Tuple
+from copy import deepcopy
 
 from tic_tac_toe.game import whois_winner
-from tic_tac_toe.utils.plot import plot, plot_values
-from tic_tac_toe.utils.permutations import get_all_symmetries_for_board
 from tic_tac_toe.utils.ternary import Ternary
+from tic_tac_toe.utils.plot import plot, plot_values
 
-VALUE_X = {}
-VALUE_O = {}
+np.set_printoptions(suppress=True)
+
+VALUE_X: dict = {}
+VALUE_O: dict = {}
 DEFAULT_VALUE = 0.5
-EPSILON = 0.2
-ALPHA = 0.9
+EPSILON = 0.05
+ALPHA = 0.5
 
 
 def get_value(board: Ternary, player: int) -> Tuple[Ternary, float]:
     v = VALUE_X if player == 2 else VALUE_O
 
-    if v.get(board.number) is None:
-        symmetries = get_all_symmetries_for_board(board)
-
-        for s in symmetries:
-            if v.get(s.number) is not None:
-                return s, v.get(s.number)
+    if (w := whois_winner(board)) >= 0:
+        v[board.number] = (w == player) * 1
+        return board, v[board.number]
 
     return board, v.get(board.number, DEFAULT_VALUE)
 
 
 def explore_action(board: Ternary, player: int) -> Tuple[int, Ternary]:
     actions = np.where(np.array(list(board.number)) == "0")[0]
-    action_chose = np.random.choice(actions, 1)[0]
+    action_chosen = np.random.choice(actions, 1)[0]
 
     action_board = list(board.number)
-    action_board[action_chose] = str(player)
+    action_board[action_chosen] = str(player)
 
-    action_hash, action_value = get_value(Ternary("".join(action_board)), player)
-
-    return action_chose, action_hash
+    return action_chosen, Ternary("".join(action_board))
 
 
-def exploit_action(board: Ternary, player: int) -> Tuple[int, Ternary]:
+def exploit_action(board: Ternary, player: int) -> Tuple[int, Ternary, dict]:
     actions = np.where(np.array(list(board.number)) == "0")[0]
-    best_action_value = -99
+    best_action_value = -99.
     best_action_hash = Ternary("0" * 9)
     best_action = 0
+    action_values = {}
 
     for a in actions:
         action_board = list(board.number)
         action_board[a] = str(player)
         action_hash, action_value = get_value(Ternary("".join(action_board)), player)
+        action_values[a] = action_value
 
         if best_action_value < action_value:
             best_action_value = action_value
+            best_action_hash = deepcopy(action_hash)
             best_action = a
 
-    return best_action, best_action_hash
+    return best_action, best_action_hash, action_values
 
 
-def train(num_rounds=100):
-    for r in range(num_rounds):
+def train(num_rounds=10000):
+    for r in range(1, num_rounds + 1):
         board = Ternary("0" * 9)
         turn = 1
         winner = -1
         game = ""
-        history = []
+        history_x = []
+        history_o = []
 
         # Play game
         while winner < 0:
             player = turn % 2 + 1
 
             # Explore move
-            if np.random.rand() < EPSILON:
+            if np.random.uniform(0, 1) < EPSILON:
                 action, board_hash = explore_action(board, player)
             # Exploit move
             else:
-                action, board_hash = exploit_action(board, player)
+                action, board_hash, _ = exploit_action(board, player)
 
-            history.append(board_hash)
+            if player == 2:
+                history_x.append(board_hash)
+            else:
+                history_o.append(board_hash)
+
             game += str(action)
 
             action_board = list(board.number)
@@ -85,27 +90,20 @@ def train(num_rounds=100):
             winner = whois_winner(board)
             turn += 1
 
-        if winner == 2:
-            reward_x = 1
-            reward_o = 0
-        elif winner == 1:
-            reward_x = 0
-            reward_o = 1
-        else:
-            reward_x = 0
-            reward_o = 0
+        reward_x = (winner == 2) * 1.
+        reward_o = (winner == 1) * 1.
 
         # Assign values player X
-        for h in history[::-2]:
-            v = VALUE_X.get(h.number, DEFAULT_VALUE)
+        for h in history_x[::-1]:
+            _, v = get_value(h, 2)
             VALUE_X[h.number] = v + ALPHA * (reward_x - v)
-            reward_x = v
+            reward_x = deepcopy(VALUE_X[h.number])
 
-        # Assign values player X
-        for h in history[::-1][1::2]:
-            v = VALUE_X.get(h.number, DEFAULT_VALUE)
-            VALUE_X[h.number] = v + ALPHA * (reward_o - v)
-            reward_o = v
+        # Assign values player O
+        for h in history_o[::-1]:
+            _, v = get_value(h, 1)
+            VALUE_O[h.number] = v + ALPHA * (reward_o - v)
+            reward_o = deepcopy(VALUE_O[h.number])
 
         # Logging
         if r % 10000 == 0:
@@ -115,7 +113,7 @@ def train(num_rounds=100):
 
 if __name__ == "__main__":
     print("Training...")
-    train(60000)
+    train(20000)
     print("Training finished!")
     print("-------------------------")
     print("Human vs RL")
@@ -125,18 +123,11 @@ if __name__ == "__main__":
         _board = Ternary("0" * 9)
         _winner = -1
         _turn = 1
-        _action_values = {}
 
         while _winner < 0:
             _player = _turn % 2 + 1
             if _player == 2:
-                _action, _ = exploit_action(_board, _player)
-
-                for _a in np.where(np.array(list(_board.number)) == "0")[0]:
-                    __action_board = list(_board.number)
-                    __action_board[_a] = str(_player)
-                    _, _action_value = get_value(Ternary("".join(__action_board)), _player)
-                    _action_values[_a] = _action_value
+                _action, _, _action_values = exploit_action(_board, _player)
 
                 print(plot_values(_board, _action_values))
             else:
