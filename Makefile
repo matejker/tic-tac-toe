@@ -28,3 +28,11 @@ typecheck: requirements_tools
 .PHONY: notebook
 notebook:
 	poetry run jupyter notebook
+
+.PHONY: ipython
+ipytho:
+	poetry run jupyter ipython
+
+.PHONY: run_rl
+run_rl:
+	poetry run python tic_tac_toe/reinforcement_learning.py

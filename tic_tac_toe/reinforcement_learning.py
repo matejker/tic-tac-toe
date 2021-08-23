@@ -1,5 +1,5 @@
 import numpy as np
-from typing import Tuple
+from typing import Tuple, Dict
 from copy import deepcopy
 
 from tic_tac_toe.game import whois_winner
@@ -8,14 +8,20 @@ from tic_tac_toe.utils.plot import plot, plot_values
 
 np.set_printoptions(suppress=True)
 
-VALUE_X: dict = {}
-VALUE_O: dict = {}
+VALUE_X: Dict = {}
+VALUE_O: Dict = {}
 DEFAULT_VALUE = 0.5
 EPSILON = 0.05
 ALPHA = 0.5
 
 
 def get_value(board: Ternary, player: int) -> Tuple[Ternary, float]:
+    """A value function for each state and player
+    Initial values:
+    • Winning end-state has value 1
+    • Lost / draw end-states are worth 0
+    • Otherwise DEFAULT_VALUE (0.5)
+    """
     v = VALUE_X if player == 2 else VALUE_O
 
     if (w := whois_winner(board)) >= 0:
@@ -26,6 +32,7 @@ def get_value(board: Ternary, player: int) -> Tuple[Ternary, float]:
 
 
 def explore_action(board: Ternary, player: int) -> Tuple[int, Ternary]:
+    """Choose action at random from the set of available actions"""
     actions = np.where(np.array(list(board.number)) == "0")[0]
     action_chosen = np.random.choice(actions, 1)[0]
 
@@ -35,12 +42,13 @@ def explore_action(board: Ternary, player: int) -> Tuple[int, Ternary]:
     return action_chosen, Ternary("".join(action_board))
 
 
-def exploit_action(board: Ternary, player: int) -> Tuple[int, Ternary, dict]:
+def exploit_action(board: Ternary, player: int) -> Tuple[int, Ternary, Dict]:
+    """Choose action with the highest value from player's value function"""
     actions = np.where(np.array(list(board.number)) == "0")[0]
-    best_action_value = -99.
+    best_action_value = -99.0
     best_action_hash = Ternary("0" * 9)
     best_action = 0
-    action_values = {}
+    action_values: Dict = {}
 
     for a in actions:
         action_board = list(board.number)
@@ -57,6 +65,7 @@ def exploit_action(board: Ternary, player: int) -> Tuple[int, Ternary, dict]:
 
 
 def train(num_rounds=10000):
+    """To train players and fill their value functions with winning probabilities"""
     for r in range(1, num_rounds + 1):
         board = Ternary("0" * 9)
         turn = 1
@@ -90,8 +99,15 @@ def train(num_rounds=10000):
             winner = whois_winner(board)
             turn += 1
 
-        reward_x = (winner == 2) * 1.
-        reward_o = (winner == 1) * 1.
+        reward_x = (winner == 2) * 1.0
+        reward_o = (winner == 1) * 1.0
+
+        """
+        Player's value functions are updated based on:
+          V(S_t) = V(S_t) + \alpha * (V(S_{t+1}) - V(S_t))
+        where S_t is state at time t, \alpha is the learning rate parameter and V(S_t)
+        is the probability of winning from that state.
+        """
 
         # Assign values player X
         for h in history_x[::-1]:
@@ -113,7 +129,7 @@ def train(num_rounds=10000):
 
 if __name__ == "__main__":
     print("Training...")
-    train(20000)
+    train()
     print("Training finished!")
     print("-------------------------")
     print("Human vs RL")
