@@ -30,8 +30,8 @@ notebook:
 	poetry run jupyter notebook
 
 .PHONY: ipython
-ipytho:
-	poetry run jupyter ipython
+ipython:
+	poetry run ipython
 
 .PHONY: run_rl
 run_rl:

@@ -2,9 +2,9 @@ import numpy as np
 from typing import Tuple, Dict
 from copy import deepcopy
 
-from tic_tac_toe.game import whois_winner
 from tic_tac_toe.utils.ternary import Ternary
 from tic_tac_toe.utils.plot import plot, plot_values
+from tic_tac_toe.utils.permutations import whois_winner
 
 np.set_printoptions(suppress=True)
 
@@ -122,7 +122,7 @@ def train(num_rounds=10000):
             reward_o = deepcopy(VALUE_O[h.number])
 
         # Logging
-        if r % 10000 == 0:
+        if r % (num_rounds // 10) == 0:
             print(f"\nGame: {game}, winner: {winner}, round: {r}\n")
             print(plot(game))
 
