@@ -36,3 +36,7 @@ ipython:
 .PHONY: run_rl
 run_rl:
 	poetry run python tic_tac_toe/reinforcement_learning.py
+
+.PHONY: run_menace
+run_menace:
+	poetry run python tic_tac_toe/menace.py

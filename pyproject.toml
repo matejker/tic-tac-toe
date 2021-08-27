@@ -8,6 +8,7 @@ authors = ["Matej Kerekrety <matej.kerekrety@gmail.com>"]
 python = ">=3.8,<3.11"
 notebook = "^6.4.3"
 numpy = "^1.21.2"
+matplotlib = "^3.4.3"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.2.4"

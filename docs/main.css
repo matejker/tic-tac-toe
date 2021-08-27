@@ -1,0 +1,129 @@
+body {
+    text-align: center;
+    font-family: et-book, Palatino, Georgia;
+    color: #121212;
+    font-size: 1.2em;
+    background: #f8f8f9;
+    line-height: 1.4em;
+}
+
+#main {
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: left;
+    padding: 0.5em;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 500;
+}
+
+h1 {
+    font-size: 2.2em;
+    margin-bottom: 0.2em;
+}
+
+h2.reference {
+    margin-bottom: 0.2em;
+}
+
+.description {
+    font-size: 1.2em;
+}
+
+a {
+    color: #007185;
+}
+
+a:hover {
+    color: #C7511F;
+}
+
+/* http://jsfiddle.net/degaD/ */
+ol.reference {
+    list-style: none;
+    counter-reset: my-badass-counter;
+    margin: 0;
+}
+
+ol.reference li:nth-of-type(1){
+  font-weight: normal;
+}
+
+ol.reference li {
+    list-style-position:outside;
+    margin-left: 0;
+    padding: 0.5em 0.1em;
+    font-size: 0.8em;
+    counter-increment: my-badass-counter;
+    margin-left: -1.3vmin;
+    margin-right: .1vmin;
+}
+
+ol.reference li:before {
+    content: "[" counter(my-badass-counter) "] ";
+    margin-left: -2.8vmin;
+}
+
+.side-note {
+    margin-left: -170px;
+    width: 150px;
+    font-size: 0.8em;
+    float: left;
+    text-align: justify;
+}
+
+footer {
+    color: #555;
+    margin: 0.2em auto;
+    font-size: 0.8em;
+}
+
+/* https://stackoverflow.com/questions/15175269/superscripted-list-items */
+.foot-notes {
+    font-size: 0.8em;
+    border-top: 1px solid #555;
+    counter-reset: item;
+    padding: 0;
+    padding-top: 1em;
+    list-style:none;
+}
+
+.foot-notes li:before{
+    content: counter(item) ")";
+    counter-increment: item;
+    position: absolute;
+    vertical-align:super;
+    font-size:xx-small;
+    left: 1em;
+}
+
+.foot-notes li{
+    position: relative;
+    display: block;
+    padding: .0em .0em .0em 1.5em;
+}
+
+.center {
+    text-align: center;
+}
+
+.left {
+    float: left
+}
+
+.right {
+    float: right;
+}
+
+sup {
+    vertical-align: baseline;
+    position: relative;
+    top: -0.4em;
+}
+
+sub {
+    vertical-align: baseline;
+    position: relative;
+    top: 0.3em;
+}
