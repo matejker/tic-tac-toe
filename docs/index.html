@@ -30,17 +30,18 @@
         you spend your time with playing and studying such a triviality? Well, I got interested in Reinforcement learning
         <sup><a href="#rl-note">1)</a></sup> recently. So I can used it for
         <a href="https://github.com/matejker/controllability-of-complex-networks">some more nasty stuff</a> and
-        <em>tic-tac-toe</em> is a classic example such that even Sutton & Barto [3] don't hesitate to put into the book's
-        introduction.
+        <em>tic-tac-toe</em> is a classic example such that even Sutton & Barto [3] don't hesitate to put it
+        into the book's introduction.
     </p>
     <p>
         As well as many other <em>trendy</em> machine learning techniques were invented in the early 60s [4], so does
         Reinforcement learning. I was <em>shocked</em> (ok, positively surprised) when I watched one of Hanna Fry's
-        Christmas lectures where <a href="https://www.youtube.com/watch?v=TtisQ9yZ2zo&t=890s">Matt Parker came
+        Christmas lectures where <a href="https://youtu.be/TtisQ9yZ2zo?t=2210">Matt Parker came
         with a pile of matchboxes</a> which could play <em>noughts and crosses</em>. For my surprise it wasn't Matt
-        Parker who invented it, not even <em>in-that-time PhD student</em> Matthew Scroggs [5] who he refers in his
-        <a href="">previous video</a>. It was a former Bletchley Park researcher Donald Michie in 1960 who came up with
-        a smart way how to teach a bunch of matchboxes with beads in it and to play <em>noughts and crosses</em> [1, 2].
+        Parker who invented it, not even <em>in-that-time PhD student</em> Matt Scroggs [5] who he referred in his
+        <a href="https://www.youtube.com/watch?v=R9c-_neaxeU">previous video</a>. It was a former Bletchley Park
+        researcher <a href="https://en.wikipedia.org/wiki/Donald_Michie">Donald Michie</a> in 1960 who came up with a
+        smart way how to teach a bunch of matchboxes with beads in it and to play <em>noughts and crosses</em> [1, 2].
     </p>
     <p>
         In this <em>article</em>, I try to explain some valuable math properties about the game and try to
@@ -180,19 +181,19 @@
     <h2 id="reinforcement-learning">Reinforcement learning</h2>
     <p>
         A fundamental idea of <em>reinforcement learning</em> is to learn from experience with a <em>carrot and
-        stick</em> method. Where moves which leads to a positive outcome are awarded with a <em>carrot</em> and
+        stick</em> method. Where moves which leads to a positive outcome are rewarded with a <em>carrot</em> and
         negative ones are punished with a <em>stick</em>.
     </p>
     <h3>Reward and value function</h3>
     <p>
-        There are some moves which obviously lead to the end the game and we can assign its rewards. However, for
-        majority of turns we don't know which tend lead to winning the game and which to lose and draw. Because of that
-        we will distinguish between <strong>rewards</strong> gives immediate result value and <strong>value
-        function</strong> which measures potential future rewards.
+        There are some moves which obviously lead to the end of the game and we can assign its final rewards. However,
+        for majority of turns we don't know which tend to winning the game and which to lose and draw. Because of that
+        we will distinguish between <strong>rewards</strong> gives immediate results and <strong>value
+        function</strong> which measures potential of future rewards.
     </p>
     <p>
-        As we are playing, winning and losing we would like to <em>back propagate</em> rewards of last moves into
-        earlier stages of the game. If the agent win the game we will reward it with 1, on the other hand for lost
+        As we are playing, winning and losing, we would like to <em>back propagate</em> rewards from the last moves into
+        the earlier stages of the game. If an agent win the game, we will reward it with 1, on the other hand for lost
         and draw we assigns no point. To do so we define a <strong>value function</strong> V(&middot;) which assigns
         potential to every state of board S<sub>t</sub>. In each game we retrospectively update the values using
         this formula.
@@ -202,8 +203,8 @@
     </div>
     <p>
         The value is derived as a difference between value of previous step (or a reward for final steps) and value
-        of the current step. It is discounted by a learning rate &alpha;. Initially, we assign 0s or 1s for all
-        winning and losing states and 0.5 for all others <em>middle-states</em>.
+        of the current step. It is discounted by a learning rate &alpha;. Initially, we assign 0s or 1s to all
+        winning and losing states and 0.5 to all others <em>middle-states</em>.
     </p>
 
     <h3>Exploration vs exploitation</h3>

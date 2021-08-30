@@ -40,13 +40,13 @@ def get_all_symmetries_for_board(board: str) -> List[str]:
     return symmetry_list
 
 
-def get_all_boards(starting_player: int = 2) -> Tuple[List[List[str]], List[Set[str]]]:
-    possible_boards = [set(), set(), set(), set(), set(), set(), set(), set()]
-    board_classes = [[], [], [], [], [], [], [], []]
+def get_all_boards(starting_player: int = 2, exclude_winners: bool = True) -> Tuple[List[List[str]], List[Set[str]]]:
+    possible_boards = [set(), set(), set(), set(), set(), set(), set(), set(), set(), set()]
+    board_classes = [[], [], [], [], [], [], [], [], [], []]
     possible_boards[0].add("000000000")
     board_classes[0].append("000000000")
 
-    for r in range(1, 8):
+    for r in range(1, 10):
         player = int((r + starting_player) % 2 + 1)
         for s in board_classes[r - 1]:
             possible_moves = np.where(np.array(list(s)) == "0")[0]
@@ -56,7 +56,11 @@ def get_all_boards(starting_player: int = 2) -> Tuple[List[List[str]], List[Set[
                 board = "".join(temp_board)
 
                 # Game has ended on this board
-                if whois_winner(Ternary(board)) >= 0:
+                if exclude_winners and whois_winner(Ternary(board)) >= 0:
+                    continue
+
+                # We allow winning boards, but exclude boards which ended round ago
+                if not exclude_winners and whois_winner(Ternary(s)) >= 0:
                     continue
 
                 # Board already exists in the set

@@ -1,3 +1,4 @@
+import numpy as np
 from typing import Optional, List
 
 
@@ -11,6 +12,13 @@ class Ternary:
 
     def __repr__(self) -> str:
         return self.number
+
+    def __sub__(self, other):
+        a = np.array([int(i) for i in self.number])
+        b = np.array([int(i) for i in other.number])
+        diff = a - b
+
+        return "".join([str(abs(i)) for i in diff])
 
 
 def convert_decimal_to_ternary(decimal_number: int) -> Ternary:

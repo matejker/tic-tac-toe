@@ -15,7 +15,7 @@ def plot(game: Union[str, Ternary]) -> str:
     return template.format(*x_o)
 
 
-def plot_values(game: Union[str, Ternary], action_values: dict) -> str:
+def plot_values(game: Union[str, Ternary], action_values: dict, decimal: bool = True) -> str:
     template = (
         " {1} | {2} | {3} \n"
         "-------+-------+------\n"
@@ -35,6 +35,9 @@ def plot_values(game: Union[str, Ternary], action_values: dict) -> str:
         if a != " ":
             values.append(f"  {a}  ")
             continue
-        values.append("{0:.3f}".format(round(action_values[k], 3)))
+        if decimal:
+            values.append("{0:.3f}".format(round(action_values[k], 3)))
+        else:
+            values.append("  {0}  ".format(round(action_values[k])))
 
     return template.format(*values)

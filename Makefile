@@ -40,3 +40,7 @@ run_rl:
 .PHONY: run_menace
 run_menace:
 	poetry run python tic_tac_toe/menace.py
+
+.PHONY: decision_tree
+decision_tree:
+	poetry run python tic_tac_toe/decision_tree.py
