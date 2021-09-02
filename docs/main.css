@@ -127,3 +127,37 @@ sub {
     position: relative;
     top: 0.3em;
 }
+
+.image-desc {
+    color: #555;
+    font-size: 0.6em;
+    display: block;
+}
+
+code {
+    white-space: pre;
+}
+
+.tic-tac-toe {
+    border-collapse: collapse;
+    margin: 0 auto;
+}
+
+.tic-tac-toe td {
+    width: 2em;
+    height: 2em;
+    text-align: center;
+    font-size: 2em;
+    border: none;
+    padding: 0;
+}
+
+.tic-tac-toe td.middle {
+    border-left: 1px solid #555;
+    border-right: 1px solid #555;
+}
+
+.tic-tac-toe tr.middle td {
+    border-top: 1px solid #555;
+    border-bottom: 1px solid #555;
+}
