@@ -5,11 +5,21 @@
     <link rel="stylesheet" href="main.css">
     <title>Tic-Tac-Toe</title>
 </head>
-<body>
 <script type="text/javascript"
         src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
+<script src="game.js"></script>
 <script src="minimax.js"></script>
+<script src="menace.js"></script>
+<script>
+    const createAllGames = () => {
+        createGame(1);
+        makeTurn(cells, 1);
+        initiateMenaceMemory();
+        createGameMenace(2);
+    }
+</script>
+<body onload="createAllGames()">
 <div id="main">
     <h1>Tic-Tac-Toe</h1>
     <em class="description">
@@ -214,8 +224,8 @@
         <button onclick="resetGame(1)">Start again</button>
         <span id="who-won-1"></span> <br>
         <span class="image-desc">
-            Computer uses minimax algorithm and plays optimally. If more options have the same score, it chooses one
-            action at random.
+            Computer uses minimax algorithm and plays optimally. If more available options have the same score,
+            it chooses one action at random.
         </span>
     </div>
     <p>
@@ -286,7 +296,24 @@
         The fundamental idea of MENACE is to add beads which led to winning and drawing the game, and remove beads which
         lost the game. <em>Hopping</em> that as more it plays games, the more <em>unbeatable</em> it will be.
     </p>
+    <div class="center">
+        <table class="tic-tac-toe" id="tic-tac-toe-2">
 
+        </table> <br>
+        <button onclick="resetGameMenace(2)">Start again</button>
+        <span id="who-won-2"></span> <br>
+    </div>
+    <h3>Menace's matchbox <em>brain</em></h3>
+    <p>
+        Each game below represents a matchbox with colourful beads in it. Every available cell denotes number of beads
+        for a give move. Playing the game, beads are added and removed based on the game result in real time.
+    </p>
+    <div id="scroller">
+        <div id="slide-container">
+            <div id="brains"></div>
+        </div>
+    </div>
+    <div class="holder"></div>
     <h2 id="reinforcement-learning">Reinforcement learning</h2>
     <p>
         Like in the MENACE case, the fundamental idea of <em>reinforcement learning</em> is to learn from experience with a

@@ -138,7 +138,7 @@ code {
     white-space: pre;
 }
 
-.tic-tac-toe {
+.tic-tac-toe, .brain {
     border-collapse: collapse;
     margin: 0 auto;
 }
@@ -152,12 +152,55 @@ code {
     padding: 0;
 }
 
-.tic-tac-toe td.middle {
+.tic-tac-toe td.middle, .brain td.middle {
     border-left: 1px solid #555;
     border-right: 1px solid #555;
 }
 
-.tic-tac-toe tr.middle td {
+.tic-tac-toe tr.middle td, .brain tr.middle td {
     border-top: 1px solid #555;
     border-bottom: 1px solid #555;
+}
+
+.brain {
+    font-size: 0.4em;
+    float: left;
+    margin: 0.5em;
+    text-align: center;
+}
+
+.brain td {
+    width: 1.5em;
+    line-height: 1.5em;
+}
+
+#scroller {
+    width: calc(100% - 2em);
+    height: calc(6 * 3.5em);
+    position: absolute;
+    overflow-x: scroll;
+    left: 1em;
+    right: 1em;
+}
+
+#slide-container {
+    height: 100%;
+    position: relative;
+    left: 0;
+}
+
+#brains {
+    width: 1930px;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.red {
+    color: #f00;
+}
+
+.holder {
+    height: calc(6 * 3.5em);
+    width: 100%;
 }

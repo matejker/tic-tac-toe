@@ -45,7 +45,6 @@ def initiate_menace_memory():
 
         for b in boards:
             actions = np.where(np.array(list(b)) == "0")[0] if stage > 0 else np.array([0, 1, 2])
-            # get_possible_actions(board_classes, b, stage)
 
             MENACE_MEMORY[stage % 2][b] = []
 
