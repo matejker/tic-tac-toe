@@ -250,3 +250,52 @@ const brains = () => {
     }
 }
 
+const data = {
+  labels: xAxis,
+  datasets: [
+    {
+      data: totalBeadsAdded,
+      borderColor: 'rgba(0, 113, 133, 0.9)',
+      fill: false,
+      tension: 0.1
+    }
+  ]
+};
+
+const config = {
+  type: 'line',
+  data: data,
+  options: {
+    responsive: true,
+    plugins: {
+      title: {
+        display: false
+      },
+      legend: {
+        display: false,
+      },
+      tooltip: {
+          enabled: false
+      }
+    },
+    scales: {
+      x: {
+        display: true,
+        title: {
+          display: true,
+           text: 'Number of games'
+        }
+      },
+      y: {
+        display: true,
+        title: {
+          display: true,
+          text: 'Win: +' + rewards.won + '; lost: ' + rewards.lost + '; draw: +' + rewards.draw
+        },
+        ticks: {
+          stepSize: 1
+        }
+      }
+    }
+  },
+};
