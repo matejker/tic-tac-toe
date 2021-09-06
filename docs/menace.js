@@ -6,9 +6,6 @@ let menaceCells = [0, 0, 0, 0, 0, 0, 0, 0, 0];
 let turnMenace = 0;
 let menaceHistory = [];
 
-let totalBeadsAdded = [0];
-let xAxis = [0];
-
 const numberDiff = (a, b) => {
     let diff = 0;
     for (i in a) {
