@@ -6,6 +6,9 @@ let menaceCells = [0, 0, 0, 0, 0, 0, 0, 0, 0];
 let turnMenace = 0;
 let menaceHistory = [];
 
+let totalBeadsAdded = [0];
+let xAxis = [0];
+
 const numberDiff = (a, b) => {
     let diff = 0;
     for (i in a) {
@@ -110,6 +113,8 @@ const menaceLearn = (history, winner) => {
         return
     }
 
+    xAxis.push(Number(xAxis.slice(-1)) + 1);
+
     if (winner == 1) {
         for (h in history) {
             let [action, symmetryClass] = history[h];
@@ -118,6 +123,8 @@ const menaceLearn = (history, winner) => {
                 menaceMemory[0][symmetryClass].splice(i, 1);
             }
         }
+        totalBeadsAdded.push(Number(totalBeadsAdded.slice(-1)) + rewards.lost);
+        cumulativeRewardMenace.update();
         return
     }
 
@@ -127,6 +134,8 @@ const menaceLearn = (history, winner) => {
         const rewardValues = new Array(result).fill(action);
         menaceMemory[0][symmetryClass].push(...rewardValues);
     }
+    totalBeadsAdded.push(Number(totalBeadsAdded.slice(-1)) + result);
+    cumulativeRewardMenace.update();
     return
 
 };
@@ -162,6 +171,9 @@ function resetGameMenace(gameId) {
     let span = document.querySelector('#who-won-' + gameId);
     span.innerHTML = '';
     menaceHistory = [];
+
+    let totalBeadsAdded = [0];
+    let xAxis = [0];
 
     createGameMenace(gameId);
     console.log(menaceMemory[0]["000000000"]);
@@ -237,3 +249,4 @@ const brains = () => {
         }
     }
 }
+
