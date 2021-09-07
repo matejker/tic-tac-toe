@@ -172,7 +172,7 @@
     <div class="side-note">
         <p>
             If we were interested in the game evolution - how "O" and "X" were added in each turn, we could denote the
-            game as series of fields, e.g. 032 corresponds to 👇
+            game as series of cells, e.g. 032 corresponds to 👇
         <div class="center"><img src="img/032.png" style="width: 130px"></div>
         </p>
     </div>
@@ -278,12 +278,16 @@
         to play <em>noughts and crosses</em>, which he named "<em>Matchbox Educable Noughts and Crosses Engine</em>"
         or <strong>MENACE</strong>.
     </p>
+    <!--<div class="center">-->
+        <!--<img src="img/beads.png" style="width: 65%">-->
+        <!--<span class="image-desc">Colors of each position, D. Michie [1]</span>-->
+    <!--</div>-->
     <div class="center">
-        <img src="img/beads.png" style="width: 65%">
-        <span class="image-desc">Colors of each position, D. Michie [1]</span>
+        <img src="img/menace.png" style="width: 95%">
+        <span class="image-desc">The matchbox machine MENACE build by D. Michie [1]</span>
     </div>
     <p>
-        Each position on the board has its own colour (see picture ☝️). For every possible board there is a matchbox,
+        Each position on the board has its own colour <!--(see picture ☝️)-->. For every possible board there is a matchbox,
         bear in mind that we consider only unique symmetry classes. In the first turn matchbox there  are
         <em>initially</em> 4 beads of each possible action represented by the coloured of the beads. For the matchboxes
         representing third turn, there are 3 beads of each colour, for fifth turns' 2 and for seventh 1. A bead chosen
@@ -293,28 +297,32 @@
         matchbox. If game is a draw, we add 1 extra bead for each matchbox. If MENACE lost the game, we remove the beads.
     </p>
     <div class="center">
-        <img src="img/menace.png" style="width: 95%">
-        <span class="image-desc">The matchbox machine MENACE build by D. Michie [1]</span>
-    </div>
-    <p>
-        The fundamental idea of MENACE is to add beads which led to winning and drawing the game, and remove beads which
-        lost the game. <em>Hopping</em> that as more it plays games, the more <em>unbeatable</em> it will be.
-    </p>
-    <div class="center">
         <table class="tic-tac-toe" id="tic-tac-toe-2">
 
         </table> <br>
         <button onclick="resetGameMenace(2)">Start again</button>
         <span id="who-won-2"></span> <br>
     </div>
-    <h3>Change in number of beads in the first box</h3>
+    <p>
+        The fundamental idea of MENACE is to add beads which led to winning and drawing the game, and remove beads which
+        lost the game. <em>Hopping</em> that as more it plays games, the more <em>unbeatable</em> it will be.
+    </p>
+    <p>
+        If MENACE won the game, we will add three extra beads of winning action to each matchbox representing each turn.
+        For draw we add extra one and if MENACE lost, each of the beads is removed. Following chart demonstrate a
+        <em>dummy</em> version of average reward plot. It demonstrates change in number of beads in the first box. After
+        a few plays you can observe that MENACE is losing every game, after a while it learns not to lose and the reward
+        goes up.
+    </p>
+
     <div class="center">
         <div style="width: 100%; height: 350px;"><canvas id="myChart" width="2" height="1"></canvas></div>
     </div>
     <h3>Menace's matchbox <em>brain</em></h3>
     <p>
-        Each game below represents a matchbox with colourful beads in it. Every available cell denotes number of beads
-        for a give move. Playing the game, beads are added and removed based on the game result in real time.
+        Each game below represents one of 304 matchboxes with colourful beads in it. Every available cell denotes
+        number of beads for a give move. Playing the game, beads are added and removed based on the game result in
+        real time.
     </p>
     <div id="scroller">
         <div id="slide-container">

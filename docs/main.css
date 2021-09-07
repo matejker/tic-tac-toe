@@ -165,22 +165,31 @@ code {
 .brain {
     font-size: 0.4em;
     float: left;
-    margin: 0.5em;
+    margin: 5px;
     text-align: center;
+    width: 40px;
+    height: 40px;
 }
 
 .brain td {
     width: 1.5em;
     line-height: 1.5em;
+    padding: 0.1em;
+    margin: 0;
+}
+.brain tr {
+    margin: 0;
+    padding: 0;
 }
 
 #scroller {
     width: calc(100% - 2em);
-    height: calc(6 * 3.5em);
+    height: calc(9 * 50px);
     position: absolute;
-    overflow-x: scroll;
+    overflow-x: auto;
     left: 1em;
     right: 1em;
+    text-align: center;
 }
 
 #slide-container {
@@ -190,7 +199,8 @@ code {
 }
 
 #brains {
-    width: 1930px;
+    text-align: center;
+    width: calc(38 * 50px);
     height: 100%;
     margin: 0;
     padding: 0;
@@ -201,6 +211,6 @@ code {
 }
 
 .holder {
-    height: calc(6 * 3.5em);
+    height: calc(9 * 50px);
     width: 100%;
 }

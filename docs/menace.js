@@ -152,10 +152,12 @@ function cellClickMenace(gameId, e) {
         let history = makeTurnMenace(menaceCells, gameId);
         menaceHistory.push(history);
       }
-    }
-    winner = hadGameEnded(menaceCells.join(''));
-    if (winner > -1) {
+
+      winner = hadGameEnded(menaceCells.join(''));
+      if (winner > -1) {
         menaceLearn(menaceHistory, winner);
+      }
+
     }
 }
 
