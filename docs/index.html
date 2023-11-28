@@ -196,15 +196,15 @@
     <h3>Number of possible boards</h3>
     <p>
         Part of a reason why we did all the ☝️ algebra was to came up with number of possible <em>tic-tac-toe</em>
-        boards. We know that the theoretical upper bound of possible games is <strong>3<sub>9</sub>! = 19 683</strong>. Factorial
+        boards. We know that the theoretical upper bound of possible games is <strong>9! = 362 880</strong>. Factorial
         takes in count also boards where the game already ended but we added another steps.
         <a href="http://www.se16.info/hgb/tictactoe.htm">Henry Bottomley's</a> came up with nice calculations where they
-        estimated <strong>2 466</strong> possible games.
+        estimated <strong>255 168</strong> possible games.
     </p>
     <p>
         We know that we can do even better by removing all the symmetrical boards, we can count the numbers using some
         more advance algebra e.g. <a href="https://en.wikipedia.org/wiki/Burnside%27s_lemma">Burnside's lemma</a>
-        [without any further calculations] can give us better estimate of <strong>19 683</strong>
+        [without any further calculations] can give us better estimate of <strong>2 475</strong>
         <sup><a href="#counting-thm-note">2)</a></sup> or write a fairly
         <a href="https://github.com/matejker/tic-tac-toe/blob/main/tic_tac_toe/utils/permutations.py">short code</a>.
     </p>
@@ -441,7 +441,7 @@
             get:
             $$\frac{1}{|D_4|}\sum_{g\in G}\big |X^g \big| = \frac{1}{8}\bigg( 1\times 3^9 + 3 \times 3^1 + 4 \times 3^3
             \bigg)
-            = 2\ 475
+            = 2\ 475$$
             (<em>There is one element which leaves all elements unchanged [identity], there are 3 [rotations] which
             leave
             one element unchanged and 4 [axes] which leave 3 elements unchanged.</em>) <br>
